@@ -24,7 +24,7 @@ fn setup(
         .spawn(UiCameraComponents::default())
         .spawn(NodeComponents {
             style: Style {
-                size: Size::new(Val::Px(200.0), Val::Px(200.0)),
+                size: Size::new(Val::Percent(100.0), Val::Percent(100.0)),
                 align_items: AlignItems::Stretch,
                 ..Default::default()
             },
@@ -35,7 +35,7 @@ fn setup(
             parent
                 .spawn(NodeComponents {
                     style: Style {
-                        flex_basis: Val::Percent(50.0),
+                        flex_basis: Val::Percent(20.0),
                         ..Default::default()
                     },
                     material: materials.add(Color::rgb(1.0, 0.0, 0.0).into()),
@@ -43,7 +43,7 @@ fn setup(
                 })
                 .spawn(NodeComponents {
                     style: Style {
-                        flex_basis: Val::Percent(50.0),
+                        flex_basis: Val::Percent(80.0),
                         ..Default::default()
                     },
                     material: materials.add(Color::rgb(0.0, 1.0, 0.0).into()),
