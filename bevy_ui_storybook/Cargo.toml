@@ -1,5 +1,5 @@
 [package]
-name = "bevy-ui-storybook"
+name = "bevy_ui_storybook"
 version = "0.1.0"
 authors = ["Stef <stef@srilq.email>"]
 edition = "2018"
