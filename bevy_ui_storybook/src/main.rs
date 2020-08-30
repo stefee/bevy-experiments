@@ -16,7 +16,8 @@ fn main() {
         .run();
 }
 
-fn setup(mut commands: Commands, mut materials: ResMut<Assets<ColorMaterial>>) {
+fn setup(mut commands: Commands, asset_server: Res<AssetServer>, mut materials: ResMut<Assets<ColorMaterial>>) {
+    let font_handle = asset_server.load("assets/fonts/FiraSans-Bold.ttf").unwrap();
     commands
         // ui camera
         .spawn(UiCameraComponents::default())
@@ -47,75 +48,33 @@ fn setup(mut commands: Commands, mut materials: ResMut<Assets<ColorMaterial>>) {
                     parent
                         .spawn(NodeComponents {
                             style: Style {
-                                flex_basis: Val::Px(100.0),
+                                flex_basis: Val::Px(0.0),
+                                padding: Rect {
+                                    left: Val::Px(20.0),
+                                    right: Val::Px(20.0),
+                                    top: Val::Px(10.0),
+                                    bottom: Val::Px(10.0),
+                                },
                                 ..Default::default()
                             },
                             material: debug_color(&mut materials, Color::rgb(0.2, 0.2, 1.0).into()),
                             ..Default::default()
                         })
-                        .spawn(border_horizontal_node(&mut materials))
-                        .spawn(NodeComponents {
-                            style: Style {
-                                flex_basis: Val::Px(100.0),
-                                ..Default::default()
-                            },
-                            material: debug_color(&mut materials, Color::rgb(0.3, 0.3, 1.0).into()),
-                            ..Default::default()
+                        .with_children(|parent| {
+                            parent
+                                .spawn(TextComponents {
+                                    text: Text {
+                                        value: "comp 1".to_string(),
+                                        font: font_handle,
+                                        style: TextStyle {
+                                            font_size: 50.0,
+                                            color: Color::BLACK,
+                                        },
+                                    },
+                                    ..Default::default()
+                                });
                         })
-                        .spawn(border_horizontal_node(&mut materials))
-                        .spawn(NodeComponents {
-                            style: Style {
-                                flex_basis: Val::Px(100.0),
-                                ..Default::default()
-                            },
-                            material: debug_color(&mut materials, Color::rgb(0.4, 0.4, 1.0).into()),
-                            ..Default::default()
-                        })
-                        .spawn(border_horizontal_node(&mut materials))
-                        .spawn(NodeComponents {
-                            style: Style {
-                                flex_basis: Val::Px(100.0),
-                                ..Default::default()
-                            },
-                            material: debug_color(&mut materials, Color::rgb(0.5, 0.5, 1.0).into()),
-                            ..Default::default()
-                        })
-                        .spawn(border_horizontal_node(&mut materials))
-                        .spawn(NodeComponents {
-                            style: Style {
-                                flex_basis: Val::Px(100.0),
-                                ..Default::default()
-                            },
-                            material: debug_color(&mut materials, Color::rgb(0.6, 0.6, 1.0).into()),
-                            ..Default::default()
-                        })
-                        .spawn(border_horizontal_node(&mut materials))
-                        .spawn(NodeComponents {
-                            style: Style {
-                                flex_basis: Val::Px(100.0),
-                                ..Default::default()
-                            },
-                            material: debug_color(&mut materials, Color::rgb(0.7, 0.7, 1.0).into()),
-                            ..Default::default()
-                        })
-                        .spawn(border_horizontal_node(&mut materials))
-                        .spawn(NodeComponents {
-                            style: Style {
-                                flex_basis: Val::Px(100.0),
-                                ..Default::default()
-                            },
-                            material: debug_color(&mut materials, Color::rgb(0.8, 0.8, 1.0).into()),
-                            ..Default::default()
-                        })
-                        .spawn(border_horizontal_node(&mut materials))
-                        .spawn(NodeComponents {
-                            style: Style {
-                                flex_basis: Val::Px(100.0),
-                                ..Default::default()
-                            },
-                            material: debug_color(&mut materials, Color::rgb(0.9, 0.9, 1.0).into()),
-                            ..Default::default()
-                        });
+                        .spawn(border_horizontal_node(&mut materials));
                 })
                 //
                 // vertical border
