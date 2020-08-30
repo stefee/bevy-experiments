@@ -16,14 +16,6 @@ fn main() {
         .run();
 }
 
-fn debug_color(materials: &mut ResMut<Assets<ColorMaterial>>, color: ColorMaterial) -> Handle<ColorMaterial> {
-    if DEBUG_MATERIALS {
-        materials.add(color)
-    } else {
-        Default::default()
-    }
-}
-
 fn setup(mut commands: Commands, mut materials: ResMut<Assets<ColorMaterial>>) {
     commands
         // ui camera
@@ -141,6 +133,14 @@ fn setup(mut commands: Commands, mut materials: ResMut<Assets<ColorMaterial>>) {
                     ..Default::default()
                 });
         });
+}
+
+fn debug_color(materials: &mut ResMut<Assets<ColorMaterial>>, color: ColorMaterial) -> Handle<ColorMaterial> {
+    if DEBUG_MATERIALS {
+        materials.add(color)
+    } else {
+        Default::default()
+    }
 }
 
 fn border_vertical_node(materials: &mut ResMut<Assets<ColorMaterial>>) -> NodeComponents {
