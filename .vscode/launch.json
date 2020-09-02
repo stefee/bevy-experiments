@@ -11,6 +11,7 @@
       "cargo": {
         "args": [
           "build",
+          "--release",
           "--bin=bevy_ui_storybook",
           "--package=bevy_ui_storybook"
         ],
