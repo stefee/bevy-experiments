@@ -16,7 +16,11 @@ fn main() {
         .run();
 }
 
-fn setup(mut commands: Commands, asset_server: Res<AssetServer>, mut materials: ResMut<Assets<ColorMaterial>>) {
+fn setup(
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
+    mut materials: ResMut<Assets<ColorMaterial>>,
+) {
     let font_handle = asset_server.load("assets/fonts/FiraSans-Bold.ttf").unwrap();
     commands
         // ui camera
@@ -61,18 +65,17 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>, mut materials: 
                             ..Default::default()
                         })
                         .with_children(|parent| {
-                            parent
-                                .spawn(TextComponents {
-                                    text: Text {
-                                        value: "comp 1".to_string(),
-                                        font: font_handle,
-                                        style: TextStyle {
-                                            font_size: 50.0,
-                                            color: Color::BLACK,
-                                        },
+                            parent.spawn(TextComponents {
+                                text: Text {
+                                    value: "comp 1".to_string(),
+                                    font: font_handle,
+                                    style: TextStyle {
+                                        font_size: 50.0,
+                                        color: Color::BLACK,
                                     },
-                                    ..Default::default()
-                                });
+                                },
+                                ..Default::default()
+                            });
                         })
                         .spawn(border_horizontal_node(&mut materials));
                 })
@@ -94,7 +97,10 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>, mut materials: 
         });
 }
 
-fn debug_color(materials: &mut ResMut<Assets<ColorMaterial>>, color: ColorMaterial) -> Handle<ColorMaterial> {
+fn debug_color(
+    materials: &mut ResMut<Assets<ColorMaterial>>,
+    color: ColorMaterial,
+) -> Handle<ColorMaterial> {
     if DEBUG_MATERIALS {
         materials.add(color)
     } else {
